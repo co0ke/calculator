@@ -2,7 +2,7 @@
 {
     public class CalculationResult<T>
     {
-        public T Result { get; set; }
+        public T Value { get; set; }
 
         public ValidationResult Validation { get; set; } = new ValidationResult();
     }

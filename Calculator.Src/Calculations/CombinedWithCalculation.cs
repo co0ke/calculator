@@ -9,15 +9,11 @@
         private readonly decimal _pa;
         private readonly decimal _pb;
 
+        // TODO: consider changing these to properties
         public CombinedWithCalculation(decimal pa, decimal pb)
         {
             _pa = pa;
             _pb = pb;
-        }
-
-        public string GetLogMessage()
-        {
-            throw new System.NotImplementedException();
         }
 
         public ValidationResult Validate()
@@ -44,5 +40,7 @@
         }
 
         public decimal Calculate() => _pa * _pb;
+
+        public string GetInputsForLogMessage() => $"{_pa} * {_pb}";
     }
 }

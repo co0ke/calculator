@@ -1,45 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-
-namespace Calculator.Api.Controllers
+﻿namespace Calculator.Api.Controllers
 {
+    using Calculator.Src.Calculations;
+    using Calculator.Src.Services;
+    using Microsoft.AspNetCore.Mvc;
+
     [ApiController]
     [Route("[controller]")]
     public class CalculateController : ControllerBase
     {
-        private readonly ILogger<CalculateController> _logger;
+        private readonly ICalculatorService _calculatorService;
 
-        public CalculateController(ILogger<CalculateController> logger)
+        public CalculateController(ICalculatorService calculatorService)
         {
-            _logger = logger;
+            _calculatorService = calculatorService;
         }
 
         [HttpGet]
-        [Route("CombinedBy")]
-        public ActionResult CombinedBy(decimal pa, decimal pb)
+        [Route("CombinedWith")]
+        public ActionResult CombinedWith(decimal pa, decimal pb)
         {
-            var response = new
-            {
-                Pa = pa,
-                Pb = pb,
-                Errors = new string[0]
-            };
+            var calculation = new CombinedWithCalculation(pa, pb);
 
-            return Ok(response);
+            var result = _calculatorService.Calculate(calculation);
+
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("Either")]
         public ActionResult Either(decimal pa, decimal pb)
         {
-            var response = new
-            {
-                Pa = pa,
-                Pb = pb,
-                Errors = new string[0]
-            };
+            var calculation = new EitherCalculation(pa, pb);
 
-            return Ok(response);
+            var result = _calculatorService.Calculate(calculation);
+
+            return Ok(result);
         }
     }
 }

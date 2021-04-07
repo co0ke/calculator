@@ -2,27 +2,38 @@
 {
     using Calculator.Src.Calculations;
     using Calculator.Src.DTOs;
+    using Microsoft.Extensions.Logging;
 
-    public class CalculatorService
+    public class CalculatorService : ICalculatorService
     {
+        private readonly ILogger<CalculatorService> _logger;
+
+        public CalculatorService(ILogger<CalculatorService> logger)
+        {
+            _logger = logger;
+        }
+
         public CalculationResult<decimal> Calculate(ICalculation<decimal> calculation)
         {
-            var validationResult = calculation.Validate();
-            if (!validationResult.IsValid)
+            var calculationResult = new CalculationResult<decimal>
             {
-                return new CalculationResult<decimal>
-                {
-                    Validation = validationResult
-                };
+                Validation = calculation.Validate()
+            };
+
+            if (!calculationResult.Validation.IsValid)
+            {
+                return calculationResult;
             }
 
-            // TODO: log
-            
+            calculationResult.Value = calculation.Calculate();
 
-            return new CalculationResult<decimal>
-            {
-                Result = calculation.Calculate()
-            };
+            _logger.LogInformation(
+                "Type: {Type} | Inputs: {Inputs} | Value: {Value}",
+                calculation.GetType().Name,
+                calculation.GetInputsForLogMessage(),
+                calculationResult.Value);
+
+            return calculationResult;
         }
     }
 }

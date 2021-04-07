@@ -15,11 +15,6 @@
             _pb = pb;
         }
 
-        public string GetLogMessage()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public ValidationResult Validate()
         {
             bool IsValidParam(decimal param) => param >= 0 && param <= 1;
@@ -44,5 +39,7 @@
         }
 
         public decimal Calculate() => _pa + _pb - _pa * _pb;
+
+        public string GetInputsForLogMessage() => $"{_pa} + {_pb} - {_pa} * {_pb}";
     }
 }
