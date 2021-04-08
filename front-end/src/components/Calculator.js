@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { ApiClient } from "./ApiClient";
-import { Button, TextField, Select, FormControl, MenuItem, makeStyles } from '@material-ui/core';
+import { Button, TextField, Select, FormControl, MenuItem, makeStyles } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import { ApiClient } from "../utils/ApiClient";
 import CalculatorInput from "./CalculatorInput";
-import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,8 +50,8 @@ function Calculator() {
     return (
         <form className={classes.root} onSubmit={handleSubmit}>
 
-           <CalculatorInput id="pa" label="Parameter A" value={pa} handleChange={(value) => setPa(value)}/>
-           <CalculatorInput id="pb" label="Parameter B" value={pb} handleChange={(value) => setPb(value)}/>
+           <CalculatorInput id="pa" label="Parameter A" value={pa} handleChange={(value) => setPa(value)} />
+           <CalculatorInput id="pb" label="Parameter B" value={pb} handleChange={(value) => setPb(value)} />
 
             <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
                 <Select id="mode" value={mode} onChange={(e) => setMode(e.target.value)}>
@@ -76,5 +76,3 @@ function Calculator() {
 }
 
 export default Calculator;
-
-// TODO: ESLint Plugin

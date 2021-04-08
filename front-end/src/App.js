@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Calculator from './Calculator';
 import { Container } from '@material-ui/core/';
+import Calculator from './components/Calculator';
 
 function App() {
     return (
