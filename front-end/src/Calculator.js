@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ApiClient } from "./ApiClient";
-import { Button, TextField, Select, FormControl, MenuItem, List, ListItem, makeStyles } from '@material-ui/core';
+import { Button, TextField, Select, FormControl, MenuItem, makeStyles } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
@@ -11,6 +11,11 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     formControl: {
+        margin: theme.spacing(1),
+    },
+    error: {
+        width: "96%",
+        padding: "2%",
         margin: theme.spacing(1),
     }
 }));
@@ -42,46 +47,42 @@ function Calculator() {
     }
 
     return (
-        <div>
-            <form className={classes.root} onSubmit={handleSubmit}>
-                <TextField id="pa"
-                           InputProps={{ inputProps: { min: 0, max: 2, step: "any" } }} // TODO change max to 1
-                           label="Parameter A"
-                           variant="outlined"
-                           type="number"
-                           required
-                           value={pa}
-                           onChange={(e) => setPa(e.target.value)} />
+        <form className={classes.root} onSubmit={handleSubmit}>
+            <TextField id="pa"
+                       InputProps={{ inputProps: { min: 0, max: 2, step: "any" } }} // Change max to '2' to test server side validation
+                       label="Parameter A"
+                       variant="outlined"
+                       type="number"
+                       required
+                       value={pa}
+                       onChange={(e) => setPa(e.target.value)} />
 
-                <TextField id="pb"
-                           InputProps={{ inputProps: { min: 0, max: 1, step: "any" } }}
-                           label="Parameter B"
-                           variant="outlined"
-                           type="number"
-                           required
-                           value={pb}
-                           onChange={(e) => setPb(e.target.value)} />
+            <TextField id="pb"
+                       InputProps={{ inputProps: { min: 0, max: 1, step: "any" } }}
+                       label="Parameter B"
+                       variant="outlined"
+                       type="number"
+                       required
+                       value={pb}
+                       onChange={(e) => setPb(e.target.value)} />
 
-                <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
-                    <Select id="mode" value={mode} onChange={(e) => setMode(e.target.value)}>
-                        <MenuItem value="combinedwith">Combined With</MenuItem>
-                        <MenuItem value="either">Either</MenuItem>
-                    </Select>
-                </FormControl>
+            <FormControl variant="outlined" className={classes.formControl} fullWidth={true}>
+                <Select id="mode" value={mode} onChange={(e) => setMode(e.target.value)}>
+                    <MenuItem value="combinedwith">Combined With</MenuItem>
+                    <MenuItem value="either">Either</MenuItem>
+                </Select>
+            </FormControl>
 
-                <Button variant="contained" color="primary" type="submit" fullWidth={true}>
-                    Calculate
-                </Button>
+            <Button variant="contained" color="primary" type="submit" fullWidth={true}>
+                Calculate
+            </Button>
 
-                <TextField disabled id="result" variant="filled" label="Result" value={result} />
-            </form>
+            <TextField disabled id="result" variant="filled" label="Result" value={result} />
 
             {serverErrors.length > 0 &&
-            <div>
-                {serverErrors.map((error, index) => <Alert severity="error">{error.errorMessage}</Alert>)}
-            </div>
+                serverErrors.map((error, index) => <Alert severity="error" key={index} className={classes.error}>{error.errorMessage}</Alert>)
             }
-        </div>
+        </form>
     );
 }
 
