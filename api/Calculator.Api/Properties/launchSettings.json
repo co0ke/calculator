@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "calculate/combinedwith",
+      "launchUrl": "calculate/combinedwith?pa=0.5&pb=0.5",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,8 +20,8 @@
     "Calculator.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "calculate/combinedwith",
-      "applicationUrl": "http://localhost:5000",
+      "launchUrl": "calculate/combinedwith?pa=0.5&pb=0.5",
+      "applicationUrl": "http://localhost:30956",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
