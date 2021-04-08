@@ -32,7 +32,6 @@ function Calculator() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(`Submitting pa: ${pa}, pb: ${pb}, mode: ${mode}`);
 
         ApiClient.calculate(pa, pb, mode).then(json => {
             if (json?.validation?.isValid === true) {

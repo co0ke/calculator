@@ -8,8 +8,7 @@
     {
         private readonly decimal _pa;
         private readonly decimal _pb;
-
-        // TODO: consider changing these to properties
+        
         public CombinedWithCalculation(decimal pa, decimal pb)
         {
             _pa = pa;

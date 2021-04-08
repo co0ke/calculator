@@ -28,7 +28,7 @@
             calculationResult.Value = calculation.Calculate();
 
             _logger.LogInformation(
-                "Type: {Type} | Inputs: {Inputs} | Value: {Value}",
+                "Type: {Type} | Inputs: {Inputs} | Result: {Result}",
                 calculation.GetType().Name,
                 calculation.GetInputsForLogMessage(),
                 calculationResult.Value);
