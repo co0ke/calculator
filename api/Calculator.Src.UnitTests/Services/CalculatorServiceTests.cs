@@ -74,7 +74,7 @@
             result.Should().BeEquivalentTo(expected);
             calculation.Verify(x => x.Validate(), Times.Once);
             calculation.Verify(x => x.Calculate(), Times.Once);
-            _logger.VerifyInformationWasCalled("Type: ICalculation`1Proxy | Inputs: SomeInputs | Result: 0.55");
+            _logger.VerifyInformationWasCalled("[CALCULATION] Type: ICalculation`1Proxy | Inputs: SomeInputs | Result: 0.55");
         }
     }
 }
